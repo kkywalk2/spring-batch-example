@@ -1,5 +1,6 @@
 package com.example.kky.jobs;
 
+import com.example.kky.feign.TelegramAPIClient;
 import com.example.kky.tasklets.ExampleTasklet;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -13,10 +14,12 @@ public class ExampleConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
+    private final TelegramAPIClient telegramAPIClient;
 
-    public ExampleConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
+    public ExampleConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, TelegramAPIClient telegramAPIClient) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
+        this.telegramAPIClient = telegramAPIClient;
     }
 
     @Bean
@@ -29,7 +32,7 @@ public class ExampleConfig {
     @Bean
     public Step tutorialStep() {
         return stepBuilderFactory.get("exampleStep")
-                .tasklet(new ExampleTasklet())
+                .tasklet(new ExampleTasklet(telegramAPIClient))
                 .build();
     }
 }

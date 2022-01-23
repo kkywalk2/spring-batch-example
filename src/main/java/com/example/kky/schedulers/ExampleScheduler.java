@@ -17,13 +17,15 @@ public class ExampleScheduler {
     private final Job job;
     private final JobLauncher jobLauncher;
 
-    @Scheduled(fixedDelay = 1000L)
+    @Scheduled(cron="0 20 3 * * *")
+    //@Scheduled(fixedDelay = 1000)
     public void executeJob () {
         try {
             jobLauncher.run(
                     job,
                     new JobParametersBuilder()
-                            .addString("datetime", LocalDateTime.now().toString())
+                            //.addString("datetime", LocalDateTime.now().toString())
+                            .addString("datetime", "1")
                             .toJobParameters()  // job parameter 설정
             );
         } catch (JobExecutionException ex) {
