@@ -19,7 +19,7 @@ public class ExampleTasklet implements Tasklet {
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
         log.info("send message start");
-        telegramAPIClient.sendMessage("hello bot", "52940587");
+        telegramAPIClient.sendMessage("5112580382:AAGcb-nF-UkDf1rcfVyW9kPKkwINzyeWLsc","hello bot", "52940587");
         log.info("send message finished");
         return RepeatStatus.FINISHED;
     }
